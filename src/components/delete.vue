@@ -4,8 +4,11 @@
         <tr colspan="3">
             <th>Sản phẩm đã xóa</th>
         </tr>
+        <tr v-for="item in form">
+            <td v-for="subitem in item">{{subitem}}</td>
+        </tr>
         <tr>
-            <td v-for="(item,index) in form">{{index}} : {{item}}</td>
+            <button @click="$router.go(-1)">back</button>
         </tr>
         </tbody>
     </table>
@@ -13,20 +16,27 @@
 
 <script>
     import { EventBus } from '../components/event-bus.js'
-    import Vue from 'vue';
-    var form;
+    var form=0;
     EventBus.$on('Deleted', function (data) {
+        // console.log(data);
+        // form.push(data);
+        // // form.push(data);
+        // console.log(form);
+        // // console.log("sdasd");
+        // console.log(data);
         form=data;
     });
     export default {
         name: 'delete',
         data:function () {
           return {
-              form:null
+              form:[]
           }
         },
         mounted:function () {
-            this.form=form;
+            console.log(this.form);
+            console.log(form);
+            this.form.push(form);
         }
 
     }
